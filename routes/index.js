@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/task');
+const dbMiddleware = require('../middlewares/dbMiddle');
+
+router.use(dbMiddleware);
 
 let todos = [];
 

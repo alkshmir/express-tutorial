@@ -1,7 +1,7 @@
 "use strict";
 const express = require('express');
 const router = express.Router();
-const signupController = require('../controllers/signup')
+const authController = require('../controllers/auth')
 
 router.get('/', function (req, res, next) {
   res.render('signup', {
@@ -9,5 +9,5 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.post('/', signupController.register);
+router.post('/', authController.register);
 module.exports = router;
