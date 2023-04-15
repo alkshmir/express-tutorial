@@ -1,23 +1,12 @@
-var express = require('express');
-var router = express.Router();
+"use strict";
+const express = require('express');
+const router = express.Router();
+const taskController = require('../controllers/task');
 
 let todos = [];
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', 
-      { 
-          title: 'ToDo App',
-          todos: todos,
-      }
-  );
-});
+router.get('/', taskController.getAllTasks);
 
-router.post('/', function(req, res, next) {
-    const todo = req.body.add;
-    console.log(todo);
-    todos.push(todo);
-    res.redirect('/');
-});
+router.post('/', taskController.createTask);
 
 module.exports = router;
