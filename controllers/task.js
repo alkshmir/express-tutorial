@@ -14,10 +14,7 @@ tasksController.getAllTasks = async (req, res) => {
         }
     );
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Internal Server Error');
-  } finally {
-    await prisma.$disconnect();
+    next(err);
   }
 }
 
@@ -35,10 +32,7 @@ tasksController.createTask = async (req, res) => {
     });
     res.redirect('/');
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Internal Server Error');
-  } finally {
-    await prisma.$disconnect();
+    next(err);
   }
 }
 
