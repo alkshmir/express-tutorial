@@ -1,8 +1,13 @@
 body {
-  padding: 50px;
+  background-color: lightgray;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  background-color: white;
 }
