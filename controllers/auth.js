@@ -1,6 +1,5 @@
 "use strict";
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const bcrypt = require("bcrypt");
 
 const authController = {};
 
@@ -31,11 +30,15 @@ authController.register = async (req, res, next) => {
             });
             return;
         }
-        const newuser = await prisma.user.create({
-            data: {
-                name: username,
-                password: password
-            }
+        const saltRounds = 10;
+        bcrypt.hash(password, saltRounds).then(async (hash) => {
+            // Store hash in your password DB.
+            const newuser = await req.context.prisma.user.create({
+                data: {
+                    name: username,
+                    password: hash
+                }
+            });
         });
         res.redirect('/')
     } catch (err) {
@@ -53,7 +56,7 @@ authController.signin = async (req, res, next) => {
                 name: username
             }
         });
-        if  (user === null || user.password !== password) {
+        if  (user === null || !await bcrypt.compare(password, user.password)) {
             res.status(401).render("signin", {
                 title: "Sign in",
                 errorMessage: ["ユーザ名が存在しないか、またはパスワードが異なります。"],
