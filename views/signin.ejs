@@ -16,15 +16,26 @@
           alert("<%= errorMessage %>");
         </script>
     <% } %>
-    <form action="/signin?redirect=<%= redirectUrl %>" method="post">
-        <label>ユーザ名</label>
-        <input required type="text" name="username"/>
-        <br>
-        <label>パスワード</label>
-        <input required type="password" name="password"/>
-        <br>
-        <input type="submit" value="Sign in"/>
-    </form>
+    <div class="container">
+      <form class="form-horizontal" action="/signin?redirect=<%= redirectUrl %>" method="post">
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="username">ユーザ名</label>
+          <div class="col-sm-10">
+            <input required type="text" class="form-control" name="username" id="username"/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="password">パスワード</label>
+          <div class="col-sm-10">
+            <input required type="password" class="form-control" name="password" id="password"/>
+          </div>
+          
+        </div>
+        <div class="offset-md-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+      </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
