@@ -4,11 +4,27 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cookieSession = require("cookie-session");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const app = express();
+
+// cookie settings
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [process.env.COOKIE_SECRET],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
